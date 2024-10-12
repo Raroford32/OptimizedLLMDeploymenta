@@ -3,9 +3,9 @@ from flask import Flask, render_template, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase
 from werkzeug.security import generate_password_hash, check_password_hash
-from llm_handler import generate_code
-from git_handler import create_git_repo, commit_changes
 from models import User, Project
+from git_handler import create_git_repo, commit_changes
+from llm_handler import generate_code
 
 class Base(DeclarativeBase):
     pass
@@ -26,8 +26,8 @@ def index():
 
 @app.route('/generate', methods=['POST'])
 def generate():
-    prompt = request.json['prompt']
-    project_name = request.json['project_name']
+    prompt = request.form['prompt']
+    project_name = request.form['project_name']
     
     # Generate code using the LLM
     generated_files = generate_code(prompt)
@@ -48,13 +48,13 @@ def generate():
     
     commit_changes(repo_path, "Initial commit")
     
-    return jsonify({'status': 'success', 'message': 'Code generated and project created'})
+    return jsonify({'status': 'success', 'message': 'Code generated and project created', 'files': generated_files})
 
 @app.route('/register', methods=['POST'])
 def register():
-    username = request.json['username']
-    email = request.json['email']
-    password = request.json['password']
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
     
     if User.query.filter_by(username=username).first():
         return jsonify({'status': 'error', 'message': 'Username already exists'}), 400
@@ -68,8 +68,8 @@ def register():
 
 @app.route('/login', methods=['POST'])
 def login():
-    username = request.json['username']
-    password = request.json['password']
+    username = request.form['username']
+    password = request.form['password']
     
     user = User.query.filter_by(username=username).first()
     if user and user.check_password(password):
