@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Chat with the Code Generator</h2>
+        <div id="chat-messages" class="chat-container border rounded p-3 mb-3"></div>
+        <form id="chat-form">
+            <div class="mb-3">
+                <input type="text" id="project-name" class="form-control" placeholder="Enter project name" required>
+            </div>
+            <div class="input-group">
+                <input type="text" id="chat-input" class="form-control" placeholder="Enter your prompt" required>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h2>Generated Code Preview</h2>
+        <pre id="code-preview" class="code-preview">
+            // Generated code will appear here
+        </pre>
+    </div>
+</div>
+{% endblock %}
