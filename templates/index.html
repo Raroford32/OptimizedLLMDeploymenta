@@ -1,25 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+<h1 class="mb-4">C++ Code Generator</h1>
 <div class="row">
     <div class="col-md-6">
-        <h2>Chat with the Code Generator</h2>
-        <div id="chat-messages" class="chat-container border rounded p-3 mb-3"></div>
-        <form id="chat-form">
+        <form id="code-generator-form">
             <div class="mb-3">
-                <input type="text" id="project-name" class="form-control" placeholder="Enter project name" required>
+                <label for="project-description" class="form-label">Project Description</label>
+                <textarea class="form-control" id="project-description" rows="5" required></textarea>
             </div>
-            <div class="input-group">
-                <input type="text" id="chat-input" class="form-control" placeholder="Enter your prompt" required>
-                <button type="submit" class="btn btn-primary">Send</button>
-            </div>
+            <button type="submit" class="btn btn-primary">Generate Code</button>
         </form>
     </div>
     <div class="col-md-6">
-        <h2>Generated Code Preview</h2>
-        <pre id="code-preview" class="code-preview">
-            // Generated code will appear here
-        </pre>
+        <h2>Generated Code</h2>
+        <pre><code id="generated-code" class="language-cpp"></code></pre>
     </div>
 </div>
 {% endblock %}

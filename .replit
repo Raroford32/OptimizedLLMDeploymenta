@@ -17,6 +17,10 @@ args = "Rust Server"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
+args = "Flask App"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
 args = "Flask Server"
 
 [[workflows.workflow]]
@@ -32,6 +36,18 @@ args = "cd advanced_code_generator_chatbot && cargo run"
 waitForPort = 8080
 
 [[workflows.workflow]]
+name = "Flask App"
+author = "agent"
+
+[workflows.workflow.metadata]
+agentRequireRestartOnSave = false
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py"
+waitForPort = 5000
+
+[[workflows.workflow]]
 name = "Flask Server"
 author = "agent"
 
@@ -41,7 +57,7 @@ agentRequireRestartOnSave = false
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python main.py"
-waitForPort = 5001
+waitForPort = 5000
 
 [deployment]
 run = ["sh", "-c", "cd advanced_code_generator_chatbot && cargo run"]
@@ -49,6 +65,10 @@ run = ["sh", "-c", "cd advanced_code_generator_chatbot && cargo run"]
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3000
 
 [[ports]]
 localPort = 8080

@@ -1,16 +1,7 @@
-/* Custom styles to complement Bootstrap */
-body {
-    padding-top: 60px;
-}
-
-.chat-container {
-    height: 400px;
-    overflow-y: auto;
-}
-
-.code-preview {
+/* Add any custom styles here if needed */
+pre {
     background-color: var(--bs-dark);
     color: var(--bs-light);
-    padding: 15px;
-    border-radius: 5px;
+    padding: 1rem;
+    border-radius: 0.25rem;
 }
